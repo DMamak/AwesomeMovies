@@ -1,46 +1,35 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import Models.Users;
 
 public class AwsomeMoviesAPI {
-	private List<Users>users=new ArrayList<Users>();
+	private Map<Long,Users> usersIndex = new HashMap<>();
 	
-	public List<Users> getUsers()
+	public Collection<Users> getUsers()
 	{
-		return users;
+		return usersIndex.values();
 	}
 	
 	public void deleteUsers() {
-		users.clear();
+		usersIndex.clear();
 	}
+
 
 	public Users createUser(String fName,String lName,String age,String gender,String occupation,String zipCode) {
 		Users user = new Users(fName,lName,age,gender,occupation,zipCode);
-		users.add(user);
+		usersIndex.put(user.id,user);
 		return user;
 	}
 
-	public Users getUser(int id)
+	public Users getUser(long id)
 	{
-		for(Users users:users)
-		{
-			if(id==users.id)
-				return users;
-		}
-		return null;
+		return usersIndex.get(id);
 	}
-	public void deleteUser(int id) {
-		Users foundUser=null;
-		for(Users users:users)
-		{
-			if(id==users.id)
-				foundUser=users;
-		}
-		if(foundUser!=null) {
-			users.remove(foundUser);
-		}
+	public void deleteUser(long id) {
+		usersIndex.remove(id);
 	}
 }

@@ -2,8 +2,8 @@ package Models;
 import static com.google.common.base.MoreObjects.toStringHelper;
 
 public class Users {
-	public int id=0;
-	public long counter=1;
+	static long counter=01L;
+	public long id=0L;
 	public String fName;
 	public String lName;
 	public String age;
@@ -16,7 +16,7 @@ public class Users {
 }
 
 	public Users(String fName, String lName, String age, String gender, String occupation, String zipCode) {
-		this.id=(int)counter++;
+		this.id=counter++;
 		this.fName = fName;
 		this.lName = lName;
 		this.age = age;
@@ -35,5 +35,9 @@ public class Users {
 									.addValue(zipCode)
 									.toString();
 	}
-	
+	//@Override
+	//public int hashCode()
+	//{
+	//	return Objects.hashCode(this.fName,this.lName,this.age,this.gender,this.occupation,this.zipCode);
+	//}
 }
