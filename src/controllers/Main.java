@@ -19,10 +19,12 @@ public class Main {
 		FileLogger logger = FileLogger.getLogger();
 		logger.log("Creating user list");
 		
-		List<Users>users=new ArrayList<Users>();
-		users.add(new Users("Damian","Mamak","21","M","Student","E91W594"));
-		users.add(new Users("Sylwia","Mamak","41","F","Manager","E91W594"));
-		users.add(new Users("Robert","Mamak","46","M","Builder","E91W594"));
+		AwsomeMoviesAPI awesomemoviesAPI= new AwsomeMoviesAPI();
+		
+		awesomemoviesAPI.createUser("Damian","Mamak","21","M","Student","E91W594");
+		awesomemoviesAPI.createUser("Sylwia","Mamak","41","F","Manager","E91W594");
+		awesomemoviesAPI.createUser("Robert","Mamak","46","M","Builder","E91W594");
+		List<Users>users=awesomemoviesAPI.getUsers();
 		System.out.println(users);
 		
 		logger.log("Serializing contacts to XML");

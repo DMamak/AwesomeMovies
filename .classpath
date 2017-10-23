@@ -7,5 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="Library/xstream-1.4.10.jar"/>
+	<classpathentry kind="lib" path="Library/guava-18.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
