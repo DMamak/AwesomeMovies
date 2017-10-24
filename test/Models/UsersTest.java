@@ -1,6 +1,7 @@
 package Models;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static Models.Fixtures.users;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,14 +9,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class UsersTest {
-	public static Users[] users =
-		{
-				new Users ("Marek","Mamak","42","M","Builder","E91W594"),
-				new Users ("Marek1","Mamak","42","M","Builder","E91W594"),
-				new Users ("Marek2","Mamak","42","M","Builder","E91W594"),
-				new Users ("Marek3","Mamak","42","M","Builder","E91W594"),
-				new Users ("Marek4","Mamak","42","M","Builder","E91W594"),
-		};
 	
 		Users person1=new Users("Damian","Mamak","21","M","Student","E91W594");
 		
