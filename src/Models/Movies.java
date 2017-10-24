@@ -1,12 +1,17 @@
 package Models;
 import static com.google.common.base.MoreObjects.toStringHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Movies {
 	static long counter =01L;
 	public long id=0L;
 	public String title;
 	public String releaseDate;
 	public String link;
+	
+	public List<Rating> ratings = new ArrayList<>();
 	
 	public Movies() {
 		

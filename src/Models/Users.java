@@ -1,6 +1,9 @@
 package Models;
 import static com.google.common.base.MoreObjects.toStringHelper;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Users {
 	static long counter=01L;
 	public long id=0L;
@@ -10,6 +13,7 @@ public class Users {
 	public String gender;
 	public String occupation;
 	public String zipCode;
+	public Map<Long,Movies> movies = new HashMap<>();
 	
 	public Users() {
 		
@@ -35,9 +39,5 @@ public class Users {
 									.addValue(zipCode)
 									.toString();
 	}
-	//@Override
-	//public int hashCode()
-	//{
-	//	return Objects.hashCode(this.fName,this.lName,this.age,this.gender,this.occupation,this.zipCode);
-	//}
+
 }

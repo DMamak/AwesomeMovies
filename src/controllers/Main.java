@@ -7,6 +7,7 @@ import java.util.Collection;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+import Models.Rating;
 import Models.Users;
 import utilities.FileLogger;
 
