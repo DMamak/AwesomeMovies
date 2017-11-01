@@ -5,30 +5,30 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class MoviesTest {
-		private Movies[] movies = 
-			{
-					new Movies("ToyStory","October","derp"),
-					new Movies("ToyStory2","October2","derp2"),
-					new Movies("ToyStory3","October3","derp3"),
-					new Movies("ToyStory4","October4","derp4"),
-					new Movies("ToyStory5","October5","derp5")
-			};
+
+	@Test
+	public void moviesTest()
+	{
+		Movies movie = new Movies("ToyStory","2005","https://");
+		assertEquals(movie.title, "ToyStory");
+		assertEquals(movie.releaseDate, "2005");
+		assertEquals(movie.link, "https://");
 		
-		Movies test = new Movies("ToyStory","October","derp");
+		movie = new Movies("Thor","2012","https://");
+		assertEquals(movie.title, "Thor");
+		assertEquals(movie.releaseDate, "2012");
+		assertEquals(movie.link, "https://");
 		
-		@Test
-		public void testCreate()
-		{
-			assertEquals("ToyStory",test.title);
-			assertEquals("October",test.releaseDate);
-			assertEquals("derp",test.link);
-		}
-		
-		@Test
-		public void testToString()
-		{
-			assertEquals("Movies{"+test.id+", ToyStory, October, derp}",test.toString());
-		}
-		
-		
+		movie = new Movies("Ironman","2009","https://");
+		assertEquals(movie.title, "Ironman");
+		assertEquals(movie.releaseDate, "2009");
+		assertEquals(movie.link, "https://");
+	}
+	
+	@Test
+	public void toStringTest() {
+		Movies movie = new Movies("Avengers","2014","https://");
+		assertEquals(movie.toString(),"Movies{4, Avengers, 2014, https://}");
+	}
+
 }

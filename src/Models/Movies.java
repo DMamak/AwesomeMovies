@@ -1,8 +1,10 @@
 package Models;
 import static com.google.common.base.MoreObjects.toStringHelper;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.common.base.Objects;
 
 public class Movies {
 	static long counter =01L;
@@ -11,7 +13,7 @@ public class Movies {
 	public String releaseDate;
 	public String link;
 	
-	public List<Rating> ratings = new ArrayList<>();
+	public Map<Long,Rating> rating = new HashMap<>();
 	
 	public Movies() {
 		
@@ -33,5 +35,22 @@ public class Movies {
 									.addValue(link)
 									.toString();
 	}
+	
+	
+	@Override
+	public boolean equals(final Object obj)
+	{
+		if(obj instanceof Movies)
+		{
+			final Movies other = (Movies) obj;
+			return Objects.equal(title, other.title)
+					&& Objects.equal(releaseDate, other.releaseDate)
+					&& Objects.equal(link, other.link);
+		}
+		else
+		{
+			return false;
+		}
 
+}
 }

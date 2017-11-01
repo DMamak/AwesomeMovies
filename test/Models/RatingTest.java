@@ -5,27 +5,28 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class RatingTest {
-
 	@Test
-	void testCreate()
+	public void ratingTest()
 	{
-		Rating one = new Rating(5f);
-		assertEquals (5f, one.ratings);
+		Rating rating = new Rating(1L,1L,2.0f);
+		assertSame(rating.userId, 1L);
+		assertSame(rating.movieId, 1L);
+		assertEquals(rating.ratings, 2.0f);
+		
+		rating = new Rating(2L,1L,5.0f);
+		assertSame(rating.userId,2L);
+		assertSame(rating.movieId,1L);
+		assertEquals(rating.ratings,5.0f);
+		
+		rating = new Rating(2L,3L,10.0f);
+		assertSame(rating.userId,2L);
+		assertSame(rating.movieId,3L);
+		assertEquals(rating.ratings,10.0f);
 	}
 	
 	@Test
-	public void testIds()
-	{
-		Rating one = new Rating(5f);
-		Rating two = new Rating(3f);
-		assertNotEquals(one.id,two.id);
+	public void toStringTest() {
+		Rating rating = new Rating(3L,2L,3.0f);
+		assertEquals(rating.toString(),"Rating{1, 3, 2, 3.0}");
 	}
-	
-	@Test
-	public void testToString()
-	{
-		Rating one = new Rating(5f);
-		assertEquals("Rating{3, 5.0}",one.toString());
-	}
-
 }
