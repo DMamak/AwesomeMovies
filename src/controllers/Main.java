@@ -1,204 +1,150 @@
 package controllers;
 
 import java.io.File;
-import java.util.Scanner;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
 
+import Models.Movies;
+import Models.Rating;
+import Models.Users;
+import asg.cliche.Command;
+import asg.cliche.Param;
+import asg.cliche.Shell;
+import asg.cliche.ShellFactory;
 import utilities.Serializer;
 import utilities.XMLSerializer;
 
 public class Main {
-    @SuppressWarnings("resource")
-	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
+	AwsomeMoviesAPI aweApi;
+	
+	@Command(description= "Initial CSV Load")
+	public void initialLoad() throws IOException
+	{
+		aweApi.initialLoad();
+	}
+	
+	@Command(description ="Get all User Details")
+	public void getUsers()
+	{
+		Collection<Users> users = aweApi.getUsers();
+		System.out.println(users);
+	}
+	@Command(description="Delete ALL Users")
+	public void clearUsers()
+	{
+		aweApi.clearUsers();
+	}
+	
+	@Command(description="Create new User")
+	public void addUser(@Param(name="First Name") String fname,@Param(name="Last Name") String lname,@Param(name="Age") String age,@Param(name="Gender") String gender,
+			@Param(name="password") String password,@Param(name="zipCode") String zipCode)
+	{
+		aweApi.addUser(fname,lname,age,gender,password,zipCode);
+	}
+	@Command(description="Search for a User")
+	public Users getUser(@Param(name="User Id")long id)
+	{
+		return aweApi.getUser(id);
+	}
+	
+	@Command(description="Delete a User")
+	public void deleteUser(@Param(name="User ID")long id)
+	{
+		aweApi.deleteUser(id);
+	}
+	
+	@Command(description="Get all Movies")
+	public void getMovies()
+	{
+		aweApi.getMovies();
+	}
+	
+	@Command(description="Clear all movies")
+	public void clearMovies()
+	{
+		aweApi.clearMovies();
+	}
+	
+	@Command(description="Add a new Movie")
+	public void addMovie(@Param(name="Title")String title,@Param(name="Release Date")String releaseDate,@Param(name="Link")String link)
+	{
+		aweApi.addMovies(title, releaseDate, link);
+	}
+	
+	@Command(description="Get a Movie")
+	public Movies getMovie(@Param(name="Movie Id")long id)
+	{
+		return aweApi.getMovie(id);
+	}
+	
+	@Command(description="Delete Movie")
+	public void deleteMovie(@Param(name="Movie Id")long id)
+	{
+		aweApi.deleteMovie(id);
+	}
+	
+	@Command(description="Get All Ratings")
+	public void getRatings()
+	{
+		aweApi.getRatings();
+	}
+	
+	@Command(description="Clear all Ratings")
+	public void clearRating()
+	{
+		aweApi.clearRatings();
+	}
+
+	@Command(description="Adding a new Rating")
+	public void addRating(@Param(name="User id")long UserId,@Param(name="Movies Id")long movieId,@Param(name="Rating Value")float rating)
+	{
+		aweApi.addRating(UserId, movieId, rating);
+	}
+	
+	@Command(description="Get User Ratings")
+	public Map<Long,Rating> getUserRating(@Param(name="User ID")long id)
+	{
+		return aweApi.getUserRating(id);
+	}
+	
+	@Command(description="Get Movies Ratings")
+	public Map<Long,Rating> getMovieRating(@Param(name="Movie Id")long id)
+	{
+		return aweApi.getMovieRating(id);
+	}
+	
+	@Command(description="Return a Rating")
+	public Rating getRating(@Param(name="Rating Id")long id)
+	{
+		return aweApi.getRating(id);
+	}
+	@Command(description="Delete a Rating")
+	public void deleteRating(@Param(name="Rating Id")long id)
+	{
+		aweApi.deleteRating(id);
+	}
+
+public Main () throws Exception
+	{
 		File datastore = new File("datastore.xml");
 		Serializer serializer = new XMLSerializer(datastore);
-		AwsomeMoviesAPI awesomemoviesAPI = new AwsomeMoviesAPI(serializer);
-		Scanner sc = new Scanner(System.in);
 		
-		int choice = 0;
-		System.out.println("Welcome to the Awesome Movies Program \n");
-		System.out.println("Loading the XML Files..... \n");
+		aweApi = new AwsomeMoviesAPI(serializer);
+		
 		if(datastore.isFile())
 		{
-				awesomemoviesAPI.load();
+			aweApi.load();
 		}
-		System.out.println("Loading Complete \n");
-		System.out.println("Loading the .dat files..... \n");
-		awesomemoviesAPI.initialLoad();
-		System.out.println("Loading Complete \n ");
-		
-		do {
-			System.out.println("Welcome to the Main Menu");
-			System.out.println("1.User Menu");
-			System.out.println("2.Movies Menu");
-			System.out.println("3.Ratings Menu");
-			System.out.println("0.Exit Program");
-			System.out.println("Please Enter your Option: ");
-			choice=sc.nextInt();
-			
-			switch(choice) {
-			case 1:
-				int menu=0;
-				do {
-				System.out.println("Welcome to the User Menu");
-				System.out.println("1.Display all of the Users");
-				System.out.println("2.Add a New User");
-				System.out.println("3.Delete a User");
-				System.out.println("4.Delete all Users");
-				System.out.println("5. Get User Rating");
-				System.out.println("0.Main Menu");
-				System.out.println("Please Enter Your Option:");
-				menu=sc.nextInt();
-					switch(menu)
-					{
-					case 1: 
-						System.out.println(awesomemoviesAPI.getUsers());
-					break;
-					case 2 :
-						System.out.println("What is Users First Name? :");
-						String fName = sc.next();
-						System.out.println("What is Users Last Name? : ");
-						String lName = sc.next();
-						System.out.println("What is Users Age? : ");
-						String age = sc.next();
-						System.out.println("What is Users Gender(M/F)? :");
-						String gender = sc.next();
-						System.out.println("What is Users Occupation? : ");
-						String occupation = sc.next();
-						System.out.println("What is Users Zip-Code ?");
-						String zipCode = sc.next();
-						awesomemoviesAPI.addUser(fName, lName, age, gender, occupation, zipCode);
-						System.out.println("User Added Succesfully");
-						break;
-					
-					case 3: 
-						System.out.println("Please enter User Id that you wish to delete: ");
-						Long userId = sc.nextLong();
-						awesomemoviesAPI.deleteUser(userId);
-						System.out.println("User Deleted");
-						break;
-					
-					case 4:
-						System.out.println("Deleting all Users.....");
-						awesomemoviesAPI.clearUsers();
-						System.out.println("All Users have been deleted.");	
-						break;
-						
-					case 5:
-						System.out.println("Please enter User Id that you wish to get rating of: ");
-						Long userId1 = sc.nextLong();
-						System.out.println(awesomemoviesAPI.getUserRating(userId1));
-						break;
-					}
-			     }while(menu != 0);
-			  break ; 
-			case 2:
-				int menu1=0;
-				do {
-				System.out.println("Welcome to the Movies Menu");
-				System.out.println("1.Display all of the Movies");
-				System.out.println("2.Add a New Movie");
-				System.out.println("3.Delete a Movie");
-				System.out.println("4.Delete all Movies");
-				System.out.println("5. Get Movie Rating");
-				System.out.println("0.Main Menu");
-				System.out.println("Please Enter Your Option:");
-				menu=sc.nextInt();
-					switch(menu1)
-					{
-					case 1: 
-						System.out.println(awesomemoviesAPI.getMovies());
-					break;
-					case 2 :
-						System.out.println("What is Movie Title? :");
-						String title = sc.next();
-						System.out.println("What is Movie Release Date? : ");
-						String releaseDate = sc.next();
-						System.out.println("What is Movie Website Link? : ");
-						String link = sc.next();
-						awesomemoviesAPI.addMovies(title, releaseDate, link);
-						System.out.println("Movie Added Succesfully");
-						break;
-					
-					case 3: 
-						System.out.println("Please enter Movie Id that you wish to delete: ");
-						Long movieId = sc.nextLong();
-						awesomemoviesAPI.deleteMovie(movieId);
-						System.out.println("Movie Deleted");
-						break;
-					
-					case 4:
-						System.out.println("Deleting all Movies.....");
-						awesomemoviesAPI.clearMovies();
-						System.out.println("All Movies have been deleted.");	
-						break;
-						
-					case 5:
-						System.out.println("Please enter User Id that you wish to get rating of: ");
-						Long movieId1 = sc.nextLong();
-						System.out.println(awesomemoviesAPI.getMovieRating(movieId1));
-						break;
-					}
-			     }while(menu1 != 0);
-				
-				break;
-				
-			      case 3:
-			    	  int menu2=0;
-			    	  do {
-			    	  	System.out.println("Welcome to Rating Menu");
-			    	  	System.out.println("1.Display All Rating");
-			    	  	System.out.println("2.Add a New Rating");
-			    	  	System.out.println("3.Display Specific Rating using Rating ID");
-			    	  	System.out.println("4.Delete Rating");
-			    	  	System.out.println("5.Delete All Ratings");
-			    	  	menu2 = sc.nextInt();
-			    	  	
-			    	  	switch(menu2)
-			    	  	{
-			    	  	case 1:
-			    	  		System.out.println(awesomemoviesAPI.getRatings());
-			    	  		break;
-			    	  	case 2:
-			    	  		 System.out.println("Please enter User ID of the rating");
-			    	  		 Long userId2 = sc.nextLong();
-			    	  		System.out.println("Please enter Movie ID of the rating");
-			    	  		Long movieId2 = sc.nextLong();
-			    	  		System.out.println("Please Enter your rating");
-			    	  		Float rating = sc.nextFloat();
-			    	  		awesomemoviesAPI.addRating(userId2, movieId2, rating);
-			    	  		System.out.println("Rating added");
-			    	  		break;
-			    	  		
-			    	  	case 3:
-			    	  		System.out.println("Please Enter Rating ID");
-			    	  		Long ratingId = sc.nextLong();
-			    	  		System.out.println(awesomemoviesAPI.getRating(ratingId));
-			    	  		break;
-			    	  	case 4: 
-			    	  		System.out.println("Please Enter Rating ID");
-			    	  		Long ratingId1 = sc.nextLong();
-			    	  		awesomemoviesAPI.deleteRating(ratingId1);
-			    	  		System.out.println("Rating Deleted");
-			    	  		break;
-			    	  	case 5:
-			    	  		System.out.println("Deleting all Ratings......");
-			    	  		awesomemoviesAPI.clearRatings();
-			    	  		System.out.println("Ratings Cleared");
-			    	  		break;
-			    	  	}
-			    	  }while(menu2 !=0);
-			    	  break;
-			}
-		}while(choice !=0);
-		
-		
-		
-		
+	}
 	
-		System.out.println("Saving Changes to XML....\n");
-		awesomemoviesAPI.store();
-		System.out.println("Saving Complete \n");
-		System.out.println("Thank you for Using the Program.\n Goodbye");
+	public static void main(String[] args) throws Exception
+	{
+		// TODO Auto-generated method stub
+		Main main = new Main();
+		Shell shell= ShellFactory.createConsoleShell("ama", "Welcome to Awesome Movies - ?help  for instructions", main);
+		shell.commandLoop();
+	
+		main.aweApi.store();
 }
 }

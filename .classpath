@@ -14,5 +14,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="Library/guava-18.0.jar"/>
 	<classpathentry kind="lib" path="Library/xstream-1.4.8.jar"/>
+	<classpathentry kind="lib" path="Library/asg.cliche-110413.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

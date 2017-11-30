@@ -13,7 +13,7 @@ class UsersTest {
 		 assertEquals(user.lName,"Mamak");
 		 assertEquals(user.age,"21");
 		 assertEquals(user.gender,"M");
-		 assertEquals(user.occupation,"Student");
+		 assertEquals(user.password,"Student");
 		 assertEquals(user.zipCode,"e91w594");
 		 
 		 user = new Users("Marek","Mamak","45","M","Builder","e91w594");
@@ -21,7 +21,7 @@ class UsersTest {
 		 assertEquals(user.lName,"Mamak");
 		 assertEquals(user.age,"45");
 		 assertEquals(user.gender,"M");
-		 assertEquals(user.occupation,"Builder");
+		 assertEquals(user.password,"Builder");
 		 assertEquals(user.zipCode,"e91w594");
 		 
 		 user = new Users("Sylwia","Mamak","42","F","Lecturer","e91w594");
@@ -29,7 +29,7 @@ class UsersTest {
 		 assertEquals(user.lName,"Mamak");
 		 assertEquals(user.age,"42");
 		 assertEquals(user.gender,"F");
-		 assertEquals(user.occupation,"Lecturer");
+		 assertEquals(user.password,"Lecturer");
 		 assertEquals(user.zipCode,"e91w594");
 	}
 	

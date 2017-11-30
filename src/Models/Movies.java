@@ -13,7 +13,7 @@ public class Movies {
 	public String releaseDate;
 	public String link;
 	
-	public Map<Long,Rating> rating = new HashMap<>();
+	public Map<Long, Rating> rating = new HashMap<>();
 	
 	public Movies() {
 		

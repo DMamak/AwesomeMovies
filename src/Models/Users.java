@@ -13,7 +13,7 @@ public class Users {
 	public String lName;
 	public String age;
 	public String gender;
-	public String occupation;
+	public String password;
 	public String zipCode;
 	public Map<Long,Rating> rating = new HashMap<>();
 	
@@ -21,13 +21,13 @@ public class Users {
 		
 }
 
-	public Users(String fName, String lName, String age, String gender, String occupation, String zipCode) {
+	public Users(String fName, String lName, String age, String gender, String password, String zipCode) {
 		this.id=counter++;
 		this.fName = fName;
 		this.lName = lName;
 		this.age = age;
 		this.gender = gender;
-		this.occupation = occupation;
+		this.password=password;;
 		this.zipCode = zipCode;
 	}
 	@Override
@@ -38,7 +38,7 @@ public class Users {
 									.addValue(lName)
 									.addValue(age)
 									.addValue(gender)
-									.addValue(occupation)
+									.addValue(password)
 									.addValue(zipCode)
 									.toString();
 	}
@@ -53,7 +53,7 @@ public class Users {
 					&& Objects.equal(lName, other.lName)
 					&& Objects.equal(age, other.age)
 					&& Objects.equal(gender, other.gender)
-					&& Objects.equal(occupation, other.occupation)
+					&& Objects.equal(password, other.password)
 					&& Objects.equal(zipCode, other.zipCode);
 		}
 		else

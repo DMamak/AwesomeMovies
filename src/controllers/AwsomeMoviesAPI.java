@@ -26,6 +26,12 @@ public class AwsomeMoviesAPI {
 	{
 		this.serializer=serializer;
 	}
+	
+//	public void sortMovieName()
+//	{
+//		Iterator<Movies> iter = set.iterator();
+//	}
+	
 	@SuppressWarnings("unchecked")
 	public void load() throws Exception
 	{
@@ -51,8 +57,8 @@ public class AwsomeMoviesAPI {
 	public void clearUsers() {
 		usersIndex.clear();
 	}
-	public void addUser(String fName,String lName,String age,String gender,String occupation,String zipCode) {
-		Users user = new Users(fName,lName,age,gender,occupation,zipCode);
+	public void addUser(String fName,String lName,String age,String gender,String password,String zipCode) {
+		Users user = new Users(fName,lName,age,gender,password,zipCode);
 		usersIndex.put(user.id,user);
 	}
 	public Users getUser(long id)
@@ -103,8 +109,8 @@ public class AwsomeMoviesAPI {
 		if(movie.isPresent() && user.isPresent()) {
 			ratings = new Rating(userId,movieId,rating);
 			
-			movie.get().rating.put(movieId,ratings);
-			user.get().rating.put(userId,ratings);
+			movie.get().rating.put(ratings.ratingId, ratings);
+			user.get().rating.put(ratings.ratingId,ratings);
 			ratingIndex.put(ratings.ratingId, ratings);
 		}
 	}
@@ -115,8 +121,8 @@ public class AwsomeMoviesAPI {
 	
 			public Map<Long, Rating> getMovieRating(long id) {
 				Optional<Movies> movie = Optional.fromNullable(moviesIndex.get(id));
-					return movie.get().rating;		
-		
+				return movie.get().rating;
+				
 	}
     public Rating getRating(long id)
     {
