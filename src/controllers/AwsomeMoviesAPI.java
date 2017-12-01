@@ -18,6 +18,7 @@ public class AwsomeMoviesAPI {
 	private Map<Long,Users> usersIndex = new HashMap<>();
 	private Map<Long, Movies> moviesIndex = new HashMap<>();
 	private Map<Long, Rating> ratingIndex = new HashMap<>();
+	public Optional<Users> curUser;
 	//Serializer to XML Controls
 	public AwsomeMoviesAPI() {
 		
@@ -31,6 +32,28 @@ public class AwsomeMoviesAPI {
 //	{
 //		Iterator<Movies> iter = set.iterator();
 //	}
+
+	// Login Methods for Cliche//
+	public boolean login(Long id,String password)
+	{
+		Optional<Users> user = Optional.fromNullable(usersIndex.get(id));
+		if(user.isPresent() && user.get().password.equals(password)) {
+			curUser = user;
+			System.out.println(curUser.get().id + ""+curUser.get().fName + "logged in ...");
+			return true;
+		}
+		return false;
+	}
+	
+	public void logout()
+	{
+		Optional<Users> user=curUser;
+		if(user.isPresent()) {
+			System.out.println(curUser.get().id + ""+curUser.get().fName + "logged out ...");
+			curUser=Optional.absent();
+		}
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public void load() throws Exception
@@ -41,10 +64,10 @@ public class AwsomeMoviesAPI {
 		ratingIndex = (Map<Long,Rating>) serializer.pop();
 	}
 	void store() throws Exception
-	{
-		serializer.push(usersIndex);
-		serializer.push(moviesIndex);
+	{ 	
 		serializer.push(ratingIndex);
+		serializer.push(moviesIndex);
+		serializer.push(usersIndex);
 		serializer.write();
 	}
 	//end of Serializer Controls
@@ -57,9 +80,10 @@ public class AwsomeMoviesAPI {
 	public void clearUsers() {
 		usersIndex.clear();
 	}
-	public void addUser(String fName,String lName,String age,String gender,String password,String zipCode) {
+	public Users addUser(String fName,String lName,String age,String gender,String password,String zipCode) {
 		Users user = new Users(fName,lName,age,gender,password,zipCode);
 		usersIndex.put(user.id,user);
+		return user;
 	}
 	public Users getUser(long id)
 	{
@@ -179,9 +203,3 @@ public class AwsomeMoviesAPI {
                  scanner2.close();
          }
 }
-    
-
-    
-
-
-    

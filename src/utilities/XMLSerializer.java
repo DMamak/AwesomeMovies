@@ -11,8 +11,10 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class XMLSerializer implements Serializer {
+	
 	@SuppressWarnings("rawtypes")
 	private Stack stack = new Stack();
+	
 	private File file;
 	
 	public XMLSerializer(File file)
@@ -20,21 +22,21 @@ public class XMLSerializer implements Serializer {
 		this.file=file;
 	}
 
+	
 	@SuppressWarnings("unchecked")
-	@Override
 	public void push(Object o) {
 		// TODO Auto-generated method stub
 		stack.push(o);
 
 	}
 
-	@Override
+	
 	public Object pop() {
 		// TODO Auto-generated method stub
 		return stack.pop();
 	}
 
-	@Override
+	
 	public void write() throws Exception {
 		// TODO Auto-generated method stub
 		ObjectOutputStream os = null;
@@ -55,15 +57,15 @@ public class XMLSerializer implements Serializer {
 
 	}
 
-	@Override
-	@SuppressWarnings({ "rawtypes" })
+	
+	@SuppressWarnings("rawtypes")
 	public void read() throws Exception {
 		// TODO Auto-generated method stub
 		ObjectInputStream is = null;
 		try {
 			XStream xstream = new XStream(new DomDriver());
 			is = xstream.createObjectInputStream(new FileReader(file));
-			stack= (Stack)is.readObject();
+			stack=  (Stack) is.readObject();
 		}
 		finally
 		{

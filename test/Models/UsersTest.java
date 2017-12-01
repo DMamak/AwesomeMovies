@@ -36,7 +36,7 @@ class UsersTest {
 	@Test
 	public void toStringTest() {
 		Users user = new Users("Damian","Mamak","21","M","Student","e91w594");
-		assertEquals(user.toString(),"Users{4, Damian, Mamak, 21, M, Student, e91w594}");
+		assertEquals(user.toString(),"Users{4, Damian, Mamak, 21, M, Student, e91w594, null}");
 	}
 
 }

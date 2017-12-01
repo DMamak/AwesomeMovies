@@ -36,6 +36,12 @@ public class Movies {
 									.toString();
 	}
 	
+	@Override
+	public int hashCode()
+	{
+		return Objects.hashCode(this.title,this.releaseDate,this.link);
+	}
+	
 	
 	@Override
 	public boolean equals(final Object obj)
