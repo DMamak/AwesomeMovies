@@ -153,4 +153,13 @@ public class AdminMenu {
 	{
 		aweApi.Top5Movies(aweApi.curUser.get().id);
 	}
+	
+	@Command(description="Get Movie via title")
+	public void searchMovie(String word)
+	{
+		for(Movies movie : aweApi.searchMovie(word))
+		{
+			System.out.println(movie);
+		}
+	}
 }

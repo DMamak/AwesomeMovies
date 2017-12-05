@@ -24,7 +24,6 @@ public class AwsomeMoviesAPI {
 	private Map<Long,Users> usersIndex = new HashMap<>();
 	private Map<Long, Movies> moviesIndex = new HashMap<>();
 	private Map<Long, Rating> ratingIndex = new HashMap<>();
-	private Map<String,Movies> MovieIndex = new HashMap<>();
 	public Optional<Users> curUser;
 	//Serializer to XML Controls
 	public AwsomeMoviesAPI() {
@@ -35,6 +34,19 @@ public class AwsomeMoviesAPI {
 		this.serializer=serializer;
 	}
 	
+	public List<Movies> searchMovie (String word)
+	{
+		List<Movies> foundMovie = new ArrayList<Movies>();
+		
+		for(long i : moviesIndex.keySet())
+		{
+			if(moviesIndex.get(i).title.toLowerCase().contains(word.toLowerCase()))
+					{
+				foundMovie.add(moviesIndex.get(i));
+					}
+		}
+		return foundMovie;
+	}
 	
 	public void Top10Movies()
 	{
@@ -75,13 +87,6 @@ public class AwsomeMoviesAPI {
 		
 		
 	}
-	
-	
-	public void searchMovie(String word)
-	{
-		
-		
-	}
 	// Login Methods for Cliche//
 	public boolean login(Long id,String password)
 	{
@@ -108,7 +113,6 @@ public class AwsomeMoviesAPI {
 	public void load() throws Exception
 	{
 		serializer.read();
-		MovieIndex = (Map<String,Movies>) serializer.pop();
 		usersIndex = (Map<Long,Users>) serializer.pop();
 		moviesIndex = (Map<Long,Movies>) serializer.pop();
 		ratingIndex = (Map<Long,Rating>) serializer.pop();
@@ -118,7 +122,6 @@ public class AwsomeMoviesAPI {
 		serializer.push(ratingIndex);
 		serializer.push(moviesIndex);
 		serializer.push(usersIndex);
-		serializer.push(MovieIndex);
 		serializer.write();
 	}
 	//end of Serializer Controls
@@ -158,7 +161,6 @@ public class AwsomeMoviesAPI {
 	{
 		Movies movie = new Movies(title,releaseDate,link);
         moviesIndex.put(movie.id, movie);
-        MovieIndex.put(title, movie);
 	}
 	public Movies getMovie(long id)
 	{
