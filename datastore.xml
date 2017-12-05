@@ -4,7 +4,7 @@
     <vector>
       <default>
         <capacityIncrement>0</capacityIncrement>
-        <elementCount>3</elementCount>
+        <elementCount>4</elementCount>
         <elementData>
           <map>
             <entry>
@@ -466,6 +466,7 @@
                 <title>Toy Story (1995)</title>
                 <releaseDate>01-Jan-1995</releaseDate>
                 <link>http://us.imdb.com/M/title-exact?Toy%20Story%20(1995)</link>
+                <ratingSum>25.0</ratingSum>
                 <rating>
                   <entry>
                     <long>6</long>
@@ -505,6 +506,7 @@
                 <title>GoldenEye (1995)</title>
                 <releaseDate>01-Jan-1995</releaseDate>
                 <link>http://us.imdb.com/M/title-exact?GoldenEye%20(1995)</link>
+                <ratingSum>5.0</ratingSum>
                 <rating>
                   <entry>
                     <long>16</long>
@@ -536,6 +538,7 @@
                 <title>Four Rooms (1995)</title>
                 <releaseDate>01-Jan-1995</releaseDate>
                 <link>http://us.imdb.com/M/title-exact?Four%20Rooms%20(1995)</link>
+                <ratingSum>10.0</ratingSum>
                 <rating>
                   <entry>
                     <long>18</long>
@@ -571,6 +574,7 @@
                 <title>Get Shorty (1995)</title>
                 <releaseDate>01-Jan-1995</releaseDate>
                 <link>http://us.imdb.com/M/title-exact?Get%20Shorty%20(1995)</link>
+                <ratingSum>-6.0</ratingSum>
                 <rating>
                   <entry>
                     <long>24</long>
@@ -614,6 +618,7 @@
                 <title>Copycat (1995)</title>
                 <releaseDate>01-Jan-1995</releaseDate>
                 <link>http://us.imdb.com/M/title-exact?Copycat%20(1995)</link>
+                <ratingSum>-13.0</ratingSum>
                 <rating>
                   <entry>
                     <long>32</long>
@@ -645,6 +650,7 @@
                 <title>Shanghai Triad (Yao a yao yao dao waipo qiao) (1995)</title>
                 <releaseDate>01-Jan-1995</releaseDate>
                 <link>http://us.imdb.com/Title?Yao+a+yao+yao+dao+waipo+qiao+(1995)</link>
+                <ratingSum>1.0</ratingSum>
                 <rating>
                   <entry>
                     <long>37</long>
@@ -660,6 +666,7 @@
                 <title>Twelve Monkeys (1995)</title>
                 <releaseDate>01-Jan-1995</releaseDate>
                 <link>http://us.imdb.com/M/title-exact?Twelve%20Monkeys%20(1995)</link>
+                <ratingSum>5.0</ratingSum>
                 <rating>
                   <entry>
                     <long>38</long>
@@ -691,6 +698,7 @@
                 <title>Babe (1995)</title>
                 <releaseDate>01-Jan-1995</releaseDate>
                 <link>http://us.imdb.com/M/title-exact?Babe%20(1995)</link>
+                <ratingSum>9.0</ratingSum>
                 <rating>
                   <entry>
                     <long>43</long>
@@ -714,6 +722,7 @@
                 <title>Dead Man Walking (1995)</title>
                 <releaseDate>01-Jan-1995</releaseDate>
                 <link>http://us.imdb.com/M/title-exact?Dead%20Man%20Walking%20(1995)</link>
+                <ratingSum>-4.0</ratingSum>
                 <rating>
                   <entry>
                     <long>46</long>
@@ -733,6 +742,7 @@
                 <title>Richard III (1995)</title>
                 <releaseDate>22-Jan-1996</releaseDate>
                 <link>http://us.imdb.com/M/title-exact?Richard%20III%20(1995)</link>
+                <ratingSum>16.0</ratingSum>
                 <rating>
                   <entry>
                     <long>48</long>
@@ -781,7 +791,7 @@
                 <gender>M</gender>
                 <password>technician</password>
                 <zipCode>85711</zipCode>
-                <role>admin</role>
+                <role>default</role>
                 <rating>
                   <entry>
                     <long>32</long>
@@ -1047,7 +1057,48 @@
               </Models.Users>
             </entry>
           </map>
-          <null/>
+          <map>
+            <entry>
+              <string>Twelve Monkeys (1995)</string>
+              <Models.Movies reference="../../../map[2]/entry[7]/Models.Movies"/>
+            </entry>
+            <entry>
+              <string>Babe (1995)</string>
+              <Models.Movies reference="../../../map[2]/entry[8]/Models.Movies"/>
+            </entry>
+            <entry>
+              <string>Dead Man Walking (1995)</string>
+              <Models.Movies reference="../../../map[2]/entry[9]/Models.Movies"/>
+            </entry>
+            <entry>
+              <string>Shanghai Triad (Yao a yao yao dao waipo qiao) (1995)</string>
+              <Models.Movies reference="../../../map[2]/entry[6]/Models.Movies"/>
+            </entry>
+            <entry>
+              <string>GoldenEye (1995)</string>
+              <Models.Movies reference="../../../map[2]/entry[2]/Models.Movies"/>
+            </entry>
+            <entry>
+              <string>Four Rooms (1995)</string>
+              <Models.Movies reference="../../../map[2]/entry[3]/Models.Movies"/>
+            </entry>
+            <entry>
+              <string>Copycat (1995)</string>
+              <Models.Movies reference="../../../map[2]/entry[5]/Models.Movies"/>
+            </entry>
+            <entry>
+              <string>Richard III (1995)</string>
+              <Models.Movies reference="../../../map[2]/entry[10]/Models.Movies"/>
+            </entry>
+            <entry>
+              <string>Toy Story (1995)</string>
+              <Models.Movies reference="../../../map[2]/entry/Models.Movies"/>
+            </entry>
+            <entry>
+              <string>Get Shorty (1995)</string>
+              <Models.Movies reference="../../../map[2]/entry[4]/Models.Movies"/>
+            </entry>
+          </map>
           <null/>
           <null/>
           <null/>

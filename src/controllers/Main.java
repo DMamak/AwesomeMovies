@@ -29,11 +29,13 @@ public class Main implements ShellDependent {
 		}
 	}
 	
+	
 	@Command(description= "Initial CSV Load")
 	public void initialLoad() throws IOException
 	{
 		aweApi.initialLoad();
 	}
+	
 	
 	@Command(description="Log in")
 	public void logIn(@Param(name = "User Id")long id,@Param(name = "password")String pass) throws IOException
@@ -52,8 +54,6 @@ public class Main implements ShellDependent {
 		}else
 			System.out.println("Unknown Username/password");
 	}
-
-
 	
 	public static void main(String[] args) throws Exception
 	{

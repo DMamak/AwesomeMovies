@@ -1,6 +1,5 @@
 package controllers;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
@@ -141,5 +140,17 @@ public class AdminMenu {
 	public void deleteRating(@Param(name="Rating Id")long id)
 	{
 		aweApi.deleteRating(id);
+	}
+	
+	@Command(description="Get TOP 10 Movies")
+	public void Top10()
+	{
+		aweApi.Top10Movies();
+	}
+	
+	@Command(description="Get User Recommended Movies")
+	public void Recommender()
+	{
+		aweApi.Top5Movies(aweApi.curUser.get().id);
 	}
 }

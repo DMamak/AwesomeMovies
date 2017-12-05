@@ -12,6 +12,7 @@ public class Movies {
 	public String title;
 	public String releaseDate;
 	public String link;
+	public float ratingSum = 0;
 	
 	public Map<Long, Rating> rating = new HashMap<>();
 	

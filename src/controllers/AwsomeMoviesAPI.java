@@ -2,15 +2,21 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import com.google.common.base.Optional;
 import Models.Movies;
 import Models.Rating;
 import Models.Users;
+import utilities.ComparatorByID;
 import utilities.Serializer;
 
 public class AwsomeMoviesAPI {
@@ -18,6 +24,7 @@ public class AwsomeMoviesAPI {
 	private Map<Long,Users> usersIndex = new HashMap<>();
 	private Map<Long, Movies> moviesIndex = new HashMap<>();
 	private Map<Long, Rating> ratingIndex = new HashMap<>();
+	private Map<String,Movies> MovieIndex = new HashMap<>();
 	public Optional<Users> curUser;
 	//Serializer to XML Controls
 	public AwsomeMoviesAPI() {
@@ -28,11 +35,53 @@ public class AwsomeMoviesAPI {
 		this.serializer=serializer;
 	}
 	
-//	public void sortMovieName()
-//	{
-//		Iterator<Movies> iter = set.iterator();
-//	}
-
+	
+	public void Top10Movies()
+	{
+		List<Movies> list = new ArrayList<Movies>(moviesIndex.values());
+		Collections.sort(list, new ComparatorByID().reversed());
+		Iterator<Movies> iter = list.iterator();
+		while (iter.hasNext()) {
+			Movies s = iter.next();
+			System.out.println(s.title + "  " + (s.ratingSum / s.rating.size()));
+	}
+	}
+	
+	public void Top5Movies(long id)
+	{
+		 Map<Long,Movies> MovieIndex2 = new HashMap<>();
+		 MovieIndex2.putAll(moviesIndex);
+		 
+		Optional<Users> user = Optional.fromNullable(usersIndex.get(id));
+		Set<Long> list;
+		list= user.get().rating.keySet();
+		Iterator<Long> iter = list.iterator();
+		while(iter.hasNext()) {
+			long s = iter.next();
+			Rating temp = ratingIndex.get(s);
+			s = temp.movieId;
+			MovieIndex2.remove(s);
+		}
+		
+		List<Movies> list2 = new ArrayList<Movies>(MovieIndex2.values());
+		Collections.sort(list2, new ComparatorByID().reversed());
+		Iterator<Movies> iter2 = list2.iterator();
+		while (iter2.hasNext()) {
+			Movies s = iter2.next();
+			System.out.println(s.title + "  " + (s.ratingSum / s.rating.size()));
+	}
+		
+		
+		
+		
+	}
+	
+	
+	public void searchMovie(String word)
+	{
+		
+		
+	}
 	// Login Methods for Cliche//
 	public boolean login(Long id,String password)
 	{
@@ -59,6 +108,7 @@ public class AwsomeMoviesAPI {
 	public void load() throws Exception
 	{
 		serializer.read();
+		MovieIndex = (Map<String,Movies>) serializer.pop();
 		usersIndex = (Map<Long,Users>) serializer.pop();
 		moviesIndex = (Map<Long,Movies>) serializer.pop();
 		ratingIndex = (Map<Long,Rating>) serializer.pop();
@@ -68,6 +118,7 @@ public class AwsomeMoviesAPI {
 		serializer.push(ratingIndex);
 		serializer.push(moviesIndex);
 		serializer.push(usersIndex);
+		serializer.push(MovieIndex);
 		serializer.write();
 	}
 	//end of Serializer Controls
@@ -107,6 +158,7 @@ public class AwsomeMoviesAPI {
 	{
 		Movies movie = new Movies(title,releaseDate,link);
         moviesIndex.put(movie.id, movie);
+        MovieIndex.put(title, movie);
 	}
 	public Movies getMovie(long id)
 	{
@@ -127,7 +179,6 @@ public class AwsomeMoviesAPI {
 	public void addRating(long userId,long movieId, float rating)
 	{
 		Rating ratings = null;
-		
 		Optional<Users> user = Optional.fromNullable(usersIndex.get(userId));
 		Optional<Movies> movie = Optional.fromNullable(moviesIndex.get(movieId));
 		if(movie.isPresent() && user.isPresent()) {
@@ -136,6 +187,7 @@ public class AwsomeMoviesAPI {
 			movie.get().rating.put(ratings.ratingId, ratings);
 			user.get().rating.put(ratings.ratingId,ratings);
 			ratingIndex.put(ratings.ratingId, ratings);
+			movie.get().ratingSum = movie.get().ratingSum + rating ;
 		}
 	}
 	public Map<Long, Rating> getUserRating(long id) {

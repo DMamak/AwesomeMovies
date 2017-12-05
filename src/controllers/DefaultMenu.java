@@ -92,5 +92,17 @@ public class DefaultMenu {
 		aweApi.deleteRating(id);
 	}
 	
+	@Command(description="Get TOP 10 Movies")
+	public void Top10()
+	{
+		aweApi.Top10Movies();
+	}
+	
+	@Command(description="Get User Recommended Movies")
+	public void Recommender()
+	{
+		aweApi.Top5Movies(aweApi.curUser.get().id);
+	}
+	
 	
 }
